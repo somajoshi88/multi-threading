@@ -16,3 +16,20 @@ Communication Between Threads: Threads often need to communicate with each other
 Thread Lifecycle: Threads typically go through various states during their lifecycle, including creation, ready, running, blocked, and terminated. The operating system scheduler determines when to switch between threads based on their state and priority.
 
 Resource Sharing: Threads within the same process share resources such as memory, file descriptors, and other system resources. Proper synchronization mechanisms are required to manage access to shared resources and prevent race conditions.
+   +---------------------------------------------------+
+   |                     Process                       |
+   +---------------------------------------------------+
+   |                                                   |
+   | +-----------------------------------------------+ |
+   | |                 Main Thread                 | |
+   | | +-----------------------------------------+ | |
+   | | |             Thread 1 (Worker)           | | |
+   | | +-----------------------------------------+ | |
+   | |                                               | |
+   | | +-----------------------------------------+ | |
+   | | |             Thread 2 (Worker)           | | |
+   | | +-----------------------------------------+ | |
+   | |                                               | |
+   | +-----------------------------------------------+ |
+   |                                                   |
+   +---------------------------------------------------+
