@@ -36,6 +36,8 @@ Resource Sharing: Threads within the same process share resources such as memory
 
 
 
+```
+
 import threading
 import time 
 
@@ -53,4 +55,34 @@ t3 = threading.Thread(target=func ,args=[1])
 t1.start()
 t2.start()
 t3.start()
+```
+Thread Management: ThreadPoolExecutor manages a pool of threads, abstracting away the complexities of thread creation and management. It automatically creates and maintains a pool of worker threads, allowing tasks to be executed concurrently.
 
+Task Submission: Tasks are submitted to the ThreadPoolExecutor for execution using the submit() method. Each task can be a function or a callable object (e.g., a method of an object).
+
+Asynchronous Execution: Tasks submitted to the ThreadPoolExecutor are executed asynchronously, meaning that they run concurrently in separate threads. The executor automatically schedules tasks for execution and manages the thread pool to optimize resource usage.
+
+Control over Concurrency: You can control the maximum number of threads in the thread pool by specifying the max_workers parameter when creating the ThreadPoolExecutor instance. This allows you to limit resource consumption and avoid overloading the system with too many threads.
+
+Result Retrieval: The submit() method returns a Future object, which represents the result of the task execution. You can use the result() method of the Future object to retrieve the result of the task once it's completed. Alternatively, you can use the map() method to submit multiple tasks and retrieve their results in the order they were submitted.
+
+Error Handling: ThreadPoolExecutor provides mechanisms for handling errors that occur during task execution. You can use the add_done_callback() method to register a callback function that is called when a task completes, allowing you to handle exceptions or process the result accordingly.
+
+Graceful Shutdown: ThreadPoolExecutor supports graceful shutdown of the thread pool using the shutdown() method. This allows you to wait for all pending tasks to complete before shutting down the executor.
+from concurrent.futures import ThreadPoolExecutor
+```
+import time
+
+def task(name):
+    print(f"Task {name} is starting...")
+    time.sleep(2)
+    print(f"Task {name} is done.")
+
+# Create a ThreadPoolExecutor with maximum of 3 threads
+with ThreadPoolExecutor(max_workers=3) as executor:
+    # Submit tasks for execution
+    for i in range(5):
+        executor.submit(task, i)
+
+print("All tasks have been submitted.")
+```
